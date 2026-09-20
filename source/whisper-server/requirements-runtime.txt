@@ -1,0 +1,6 @@
+# Known-good runtime snapshot (2026-09-19).
+# For NVIDIA, install the torch stack from https://download.pytorch.org/whl/cu128 first.
+whisperx==3.8.6
+fastapi>=0.116,<1
+uvicorn[standard]>=0.35,<1
+pydantic>=2.11,<3

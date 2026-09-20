@@ -1,0 +1,15 @@
+Srijon Captioner source repository
+
+Tracked source is organized under:
+
+- source/premiere-plugin/  Premiere UXP panel and bundled local service
+- source/whisper-server/   standalone/debug local service mirror
+- setup/                   Windows setup, build, verify and install entrypoints
+- tools/                   validation and packaging helpers
+- docs/                    feature contracts, architecture and guides
+- examples/                documented output examples
+- .github/                 automated checks and contribution templates
+
+Generated `build/`, `archive/`, `release/` and `test-results/` directories are
+intentionally excluded from Git. Publish installable CCX packages through
+GitHub Releases instead of committing them to source history.

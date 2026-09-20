@@ -1,0 +1,21 @@
+Srijon Captioner v1.2.5 — Word-Level JSON
+
+New:
+- Separate Word-Level JSON output mode
+- Schema: srijon-word-transcript-v1
+- Segment start/end/text
+- Per-word word/start/end/optional score
+- JSON uses true forced-aligned WhisperX timing
+- Full source duration is returned when available
+- speech_end is reported separately by the server
+
+Preserved:
+- automatic server startup/shutdown ownership
+- active-sequence audio export/transcription
+- forced-alignment-only timing
+- deterministic smart caption composition
+- zero-gap captions
+- strict single-line SRT behavior
+- punctuation and capitalization controls
+- local caption presets
+- SRT save/copy/import workflows

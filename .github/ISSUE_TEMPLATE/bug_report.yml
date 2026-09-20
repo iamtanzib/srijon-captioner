@@ -1,0 +1,84 @@
+name: Bug report
+description: Report a reproducible problem in Srijon Captioner.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report a problem. Remove private project paths and media names from anything you attach.
+  - type: input
+    id: version
+    attributes:
+      label: Srijon Captioner version
+      placeholder: 1.2.14
+    validations:
+      required: true
+  - type: input
+    id: premiere
+    attributes:
+      label: Premiere Pro version
+      placeholder: 26.2.2
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Affected workflow
+      options:
+        - Active-sequence transcription
+        - Media-file transcription
+        - Caption rebuild/composition
+        - SRT save/import
+        - Word-level JSON
+        - Presets/settings
+        - Server startup/shutdown
+        - User interface
+        - Setup/install
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Give the smallest repeatable sequence of actions.
+      placeholder: |
+        1. Open …
+        2. Select …
+        3. Click …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the exact activity/error message when available.
+    validations:
+      required: true
+  - type: textarea
+    id: settings
+    attributes:
+      label: Relevant settings and logs
+      description: Model, language, device, compute type, batch size, line/timing settings and sanitized logs.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for this problem.
+          required: true
+        - label: I removed private filesystem paths and media details.
+          required: true

@@ -1,0 +1,171 @@
+{
+  "schema": "srijon-word-transcript-v1",
+  "language": "en",
+  "duration": 15.42,
+  "segments": [
+    {
+      "start": 0.24,
+      "end": 5.22,
+      "text": "If you're a marketer in 2026, at some point you have tried to build an AI agent.",
+      "words": [
+        {
+          "word": "If",
+          "start": 0.24,
+          "end": 0.32,
+          "score": 0.84
+        },
+        {
+          "word": "you're",
+          "start": 0.36,
+          "end": 0.58,
+          "score": 0.57
+        },
+        {
+          "word": "a",
+          "start": 0.6,
+          "end": 0.62,
+          "score": 0.97
+        },
+        {
+          "word": "marketer",
+          "start": 0.68,
+          "end": 1.2,
+          "score": 0.9
+        },
+        {
+          "word": "in",
+          "start": 1.32,
+          "end": 1.72,
+          "score": 0.55
+        },
+        {
+          "word": "2026,",
+          "start": 1.84,
+          "end": 2.36,
+          "score": 0.8
+        },
+        {
+          "word": "at",
+          "start": 2.52,
+          "end": 2.6,
+          "score": 0.83
+        },
+        {
+          "word": "some",
+          "start": 2.64,
+          "end": 2.82,
+          "score": 0.88
+        },
+        {
+          "word": "point",
+          "start": 2.86,
+          "end": 3.08,
+          "score": 0.93
+        },
+        {
+          "word": "you",
+          "start": 3.12,
+          "end": 3.2,
+          "score": 0.82
+        },
+        {
+          "word": "have",
+          "start": 3.24,
+          "end": 3.36,
+          "score": 0.85
+        },
+        {
+          "word": "tried",
+          "start": 3.38,
+          "end": 3.62,
+          "score": 0.75
+        },
+        {
+          "word": "to",
+          "start": 3.66,
+          "end": 3.72,
+          "score": 1.0
+        },
+        {
+          "word": "build",
+          "start": 3.76,
+          "end": 3.94,
+          "score": 0.61
+        },
+        {
+          "word": "an",
+          "start": 4.0,
+          "end": 4.1,
+          "score": 0.62
+        },
+        {
+          "word": "AI",
+          "start": 4.12,
+          "end": 4.22,
+          "score": 0.3
+        },
+        {
+          "word": "agent.",
+          "start": 4.3,
+          "end": 5.22,
+          "score": 0.59
+        }
+      ]
+    },
+    {
+      "start": 9.71,
+      "end": 12.39,
+      "text": "An AI agent is just a smart worker.",
+      "words": [
+        {
+          "word": "An",
+          "start": 9.71,
+          "end": 9.81,
+          "score": 0.87
+        },
+        {
+          "word": "AI",
+          "start": 9.97,
+          "end": 10.29,
+          "score": 0.8
+        },
+        {
+          "word": "agent",
+          "start": 10.53,
+          "end": 10.89,
+          "score": 0.83
+        },
+        {
+          "word": "is",
+          "start": 11.03,
+          "end": 11.11,
+          "score": 0.91
+        },
+        {
+          "word": "just",
+          "start": 11.19,
+          "end": 11.45,
+          "score": 0.75
+        },
+        {
+          "word": "a",
+          "start": 11.53,
+          "end": 11.57,
+          "score": 0.53
+        },
+        {
+          "word": "smart",
+          "start": 11.63,
+          "end": 11.93,
+          "score": 0.88
+        },
+        {
+          "word": "worker.",
+          "start": 11.99,
+          "end": 12.39,
+          "score": 0.91
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "project": "Srijon Captioner",
+  "version": "1.2.14",
+  "plugin_id": "com.srijon.captioner.local",
+  "host": {
+    "app": "premierepro",
+    "min_version": "26.2.0",
+    "tested_version": "26.2.2",
+    "manifest_version": 5
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8765,
+    "version": "1.2.14",
+    "timing_mode": "forced-alignment-required",
+    "endpoints": [
+      "GET /health",
+      "POST /transcribe",
+      "POST /unload",
+      "POST /shutdown"
+    ]
+  },
+  "runtime": {
+    "python": "3.12",
+    "default_venv": "%LOCALAPPDATA%\\SrijonCaptioner\\runtime\\whisperx-venv",
+    "default_models": "%LOCALAPPDATA%\\SrijonCaptioner\\models",
+    "overrides": [
+      "SRIJON_CAPTIONER_PYTHON",
+      "SRIJON_CAPTIONER_MODEL_DIR"
+    ]
+  },
+  "dependencies": {
+    "whisperx": "3.8.6",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "torchaudio": "2.8.0",
+    "fastapi": ">=0.116,<1",
+    "uvicorn": "[standard]>=0.35,<1",
+    "pydantic": ">=2.11,<3"
+  },
+  "output_modes": {
+    "smart_captions": {
+      "format": "SRT",
+      "uses_caption_composer": true
+    },
+    "word_json": {
+      "format": "JSON",
+      "schema": "srijon-word-transcript-v1",
+      "uses_caption_composer": false,
+      "preserves_forced_aligned_word_timing": true
+    }
+  },
+  "storage": {
+    "caption_presets": "captioner.stylePresets.v1",
+    "general_settings_prefix": "captioner.",
+    "completion_alert": "captioner.completionAlert",
+    "srt_output": "<project-dir>\\Srijon Captioner Audio\\Captions",
+    "word_json_output": "<project-dir>\\Srijon Captioner Audio\\Word Data",
+    "delivery_naming": "settings-aware stable config hash plus non-overwriting rNNN revision"
+  },
+  "critical_invariants": [
+    "forced alignment only",
+    "no approximate word timing fallback",
+    "gap=0 captions hand off exactly",
+    "single-line SRT has no explicit newline",
+    "rebuild does not retranscribe",
+    "server ownership respected",
+    "word JSON bypasses caption segmentation",
+    "word JSON schema remains srijon-word-transcript-v1",
+    "automatic delivery never overwrites an earlier output",
+    "only one caption job can run; competing server requests fail with HTTP 409",
+    "notification failure never invalidates a successful caption job"
+  ],
+  "key_files": [
+    "source/premiere-plugin/index.js",
+    "source/premiere-plugin/server.py",
+    "source/premiere-plugin/manifest.json",
+    "source/whisper-server/server.py",
+    "tools/build_ccx.py",
+    "tools/verify_runtime.py",
+    "tools/validate_project.py"
+  ]
+}

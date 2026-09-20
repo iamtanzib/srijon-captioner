@@ -1,0 +1,40 @@
+# Generated packages and release staging
+/build/
+/archive/
+/release/
+/test-results/
+*.ccx
+*.zip
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+whisperx-venv/
+.pytest_cache/
+.mypy_cache/
+
+# Local models, media, exports and logs
+models/
+*.wav
+*.mp3
+*.mp4
+*.mov
+*.mxf
+*.log
+Srijon Captioner Audio/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.user
+*.suo
+
+# Local secrets and overrides
+.env
+.env.*
+!.env.example
+runtime-config.local.json

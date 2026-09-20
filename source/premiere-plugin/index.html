@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Srijon Captioner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app" id="appScroll">
+    <header class="topBar">
+      <div class="brand">
+        <span class="brandMark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 7.25A3.25 3.25 0 0 1 10.25 4h5.5A3.25 3.25 0 0 1 19 7.25v.5A3.25 3.25 0 0 1 15.75 11h-7.5A3.25 3.25 0 0 0 5 14.25v.5A3.25 3.25 0 0 0 8.25 18h5.5A3.25 3.25 0 0 0 17 14.75"/></svg>
+        </span>
+        <span class="brandCopy">
+          <strong>Srijon Captioner</strong>
+          <small>Local captions for Premiere</small>
+        </span>
+      </div>
+
+      <div id="testServerBtn" class="serverAction uiButton" role="button" tabindex="0" title="Test the local WhisperX server">
+        <span id="serverBadge" class="statusDot bad" aria-hidden="true"></span>
+        <span class="serverCopy">
+          <strong id="serverTitle">Checking WhisperX…</strong>
+          <small id="serverDetail">Local server</small>
+        </span>
+        <svg class="icon refreshIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5M4 18v-5h5M6.1 9A7 7 0 0 1 18.7 7L20 11M4 13l1.3 4A7 7 0 0 0 17.9 15"/></svg>
+      </div>
+    </header>
+
+    <section id="activityBar" class="activityBar" aria-live="polite" aria-atomic="true" data-state="ready">
+      <span class="activityDot" aria-hidden="true"></span>
+      <span class="activityCopy"><strong id="activityLabel">Ready</strong><span id="status">WhisperX starts automatically when you transcribe.</span></span>
+    </section>
+
+    <section class="sourceBlock" aria-labelledby="sequenceName">
+      <div class="sequenceRow">
+        <div class="sequenceCopy">
+          <span>Current sequence</span>
+          <h1 id="sequenceName">Checking Premiere…</h1>
+          <p id="sequenceFps">Detecting frame rate</p>
+        </div>
+        <div id="refreshSequenceBtn" class="iconButton uiButton" role="button" tabindex="0" title="Refresh active sequence" aria-label="Refresh active sequence">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 6v5h-5M4 18v-5h5M6.1 9A7 7 0 0 1 18.7 7L20 11M4 13l1.3 4A7 7 0 0 0 17.9 15"/></svg>
+        </div>
+      </div>
+
+      <div id="transcribeSequenceBtn" class="primaryAction uiButton" role="button" tabindex="0">
+        <span class="primaryIcon" aria-hidden="true">
+          <svg class="icon" viewBox="0 0 24 24"><path d="m9 7 8 5-8 5V7Z"/></svg>
+        </span>
+        <span class="primaryCopy">
+          <strong>Transcribe current sequence</strong>
+          <small>Export audio, align every word, then build captions</small>
+        </span>
+        <svg class="icon actionChevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </div>
+
+      <div id="transcribeFileBtn" class="secondaryAction uiButton" role="button" tabindex="0">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h6l2 2h8v8.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7.5Zm0 0V6a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v1.5"/></svg>
+        <span>Choose a media file instead</span>
+      </div>
+
+      <div id="transcriptionDisclosure" class="disclosure transcriptionDisclosure" data-disclosure>
+        <div class="disclosureTrigger uiButton" role="button" tabindex="0" aria-expanded="false" aria-controls="transcriptionDisclosureBody">
+          <span>Transcription settings</span>
+          <span class="disclosureGlyph" aria-hidden="true">+</span>
+        </div>
+        <div id="transcriptionDisclosureBody" class="disclosureBody disclosureContent" aria-hidden="true">
+          <div class="settingList compactSettings">
+            <label class="settingRow"><span>Model</span><input id="model" value="large-v3" /></label>
+            <label class="settingRow"><span>Language</span><select id="language"><option value="">Auto detect</option><option value="en">English</option><option value="bn">Bangla</option><option value="hi">Hindi</option><option value="de">German</option><option value="fr">French</option><option value="es">Spanish</option></select></label>
+            <label class="settingRow"><span>Device</span><select id="device"><option value="cuda">CUDA / NVIDIA</option><option value="cpu">CPU</option></select></label>
+            <label class="settingRow"><span>Compute</span><select id="computeType"><option value="float16">float16</option><option value="int8_float16">int8_float16</option><option value="int8">int8</option><option value="float32">float32</option></select></label>
+            <label class="settingRow"><span>Batch size</span><input id="batchSize" class="shortInput" type="number" min="1" max="64" value="8" /></label>
+            <label class="switchRow settingRow">
+              <span class="switchCopy"><strong>Forced alignment</strong><small>Frame-accurate word timing</small></span>
+              <input id="alignWords" type="checkbox" checked />
+              <i class="switchTrack" aria-hidden="true"></i>
+            </label>
+            <label class="switchRow settingRow">
+              <span class="switchCopy"><strong>Completion alert</strong><small>Windows sound + short popup when a job finishes</small></span>
+              <input id="completionAlert" type="checkbox" checked />
+              <i class="switchTrack" aria-hidden="true"></i>
+            </label>
+          </div>
+          <div id="presetBtn" class="textAction uiButton" role="button" tabindex="0">Choose a different audio export preset</div>
+          <p id="presetName" class="helperText">Automatic Waveform Audio preset detection.</p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="modeControl" id="outputModeControl" aria-label="Output type">
+      <div id="modeSmartBtn" class="modeOption uiButton active" role="button" tabindex="0">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h10M5 18h14"/></svg>
+        <span>Smart captions</span>
+      </div>
+      <div id="modeWordJsonBtn" class="modeOption uiButton" role="button" tabindex="0">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5-4 7 4 7M16 5l4 7-4 7M14 4l-4 16"/></svg>
+        <span>Word data</span>
+      </div>
+      <span id="outputModeChip" class="formatBadge">SRT</span>
+    </nav>
+    <input id="outputMode" class="hiddenSetting" value="smart" />
+
+    <section class="workspace" id="smartComposeSection">
+      <header class="sectionHeader">
+        <div>
+          <h2>Caption setup</h2>
+          <p>Shape the timing and text before export.</p>
+        </div>
+      </header>
+
+      <div class="settingList captionSettings">
+        <div id="presetDisclosure" class="insetDisclosure presetDisclosure" data-disclosure>
+          <div class="disclosureTrigger uiButton" role="button" tabindex="0" aria-expanded="false" aria-controls="presetDisclosureBody">
+            <span class="summaryCopy"><strong>Caption preset</strong><small id="stylePresetHint">Custom settings</small></span>
+            <span class="disclosureGlyph" aria-hidden="true">+</span>
+          </div>
+          <div id="presetDisclosureBody" class="presetEditor disclosureContent" aria-hidden="true">
+            <div class="presetLine">
+              <select id="stylePresetSelect"><option value="">Custom / unsaved</option></select>
+              <div id="loadStylePresetBtn" class="compactAction uiButton" role="button" tabindex="0">Load</div>
+            </div>
+            <div class="presetLine">
+              <input id="stylePresetName" type="text" maxlength="60" placeholder="New preset name" />
+              <div id="saveStylePresetBtn" class="compactAction accentAction uiButton" role="button" tabindex="0">Save</div>
+              <div id="deleteStylePresetBtn" class="compactIconAction uiButton" role="button" tabindex="0" title="Delete selected preset" aria-label="Delete selected preset">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settingsSection timingBlock">
+          <div class="rowHeading timingHeading">
+            <span><strong>Timing and density</strong><small id="gapTimeHint">0 frames · seamless handoff</small></span>
+            <div id="rebuildBtn" class="smallAction uiButton" role="button" tabindex="0" title="Rebuild captions with the current settings">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5M4 18v-5h5M6.1 9A7 7 0 0 1 18.7 7L20 11M4 13l1.3 4A7 7 0 0 0 17.9 15"/></svg>
+              <span>Rebuild</span>
+            </div>
+          </div>
+          <div class="metricRow">
+            <label class="metricField"><span>Line length</span><span class="metricControl"><input id="maxChars" type="number" min="8" max="100" value="32" /><em>chars</em></span></label>
+            <label class="metricField"><span>Min. duration</span><span class="metricControl"><input id="minDuration" type="number" min="0.1" max="8" step="0.1" value="1.0" /><em>sec</em></span></label>
+            <label class="metricField"><span>Gap</span><span class="metricControl"><input id="gapFrames" type="number" min="0" max="30" step="1" value="0" /><em>frames</em></span></label>
+          </div>
+        </div>
+
+        <div class="choiceRow">
+          <span class="rowHeading"><strong>Lines</strong><small>Single never adds a hard break</small></span>
+          <div class="segmentedControl">
+            <div id="lineSingleBtn" class="segment uiButton" role="button" tabindex="0">Single</div>
+            <div id="lineDoubleBtn" class="segment uiButton active" role="button" tabindex="0">Double</div>
+          </div>
+          <input id="maxLines" class="hiddenSetting" type="number" min="1" max="2" value="2" />
+        </div>
+
+        <div class="choiceRow">
+          <span class="rowHeading"><strong>Punctuation</strong><small>Original marks still guide breaks</small></span>
+          <div class="segmentedControl">
+            <div id="punctuationRemoveBtn" class="segment uiButton active" role="button" tabindex="0">Remove</div>
+            <div id="punctuationKeepBtn" class="segment uiButton" role="button" tabindex="0">Keep</div>
+          </div>
+          <input id="punctuationMode" class="hiddenSetting" value="remove" />
+        </div>
+
+        <div class="choiceRow capitalizationRow">
+          <span class="rowHeading"><strong>Capitalization</strong><small>Smart protects names and acronyms</small></span>
+          <div class="segmentedControl fourSegments">
+            <div id="capSmartBtn" class="segment uiButton active" role="button" tabindex="0">Smart</div>
+            <div id="capOriginalBtn" class="segment uiButton" role="button" tabindex="0">Source</div>
+            <div id="capLowerBtn" class="segment uiButton" role="button" tabindex="0">lower</div>
+            <div id="capUpperBtn" class="segment uiButton" role="button" tabindex="0">CAPS</div>
+          </div>
+          <input id="capitalizationMode" class="hiddenSetting" value="smart" />
+        </div>
+
+        <label class="switchRow choiceRow phraseRow">
+          <span class="switchCopy"><strong>Smart phrase breaking</strong><small>Use pauses and punctuation for natural boundaries</small></span>
+          <input id="punctuationBreak" type="checkbox" checked />
+          <i class="switchTrack" aria-hidden="true"></i>
+        </label>
+
+        <div id="advancedDisclosure" class="insetDisclosure advancedPanel" data-disclosure>
+          <div class="disclosureTrigger uiButton" role="button" tabindex="0" aria-expanded="false" aria-controls="advancedDisclosureBody">
+            <span class="summaryCopy"><strong>Advanced composition</strong><small>Pause limits and protected names</small></span>
+            <span class="disclosureGlyph" aria-hidden="true">+</span>
+          </div>
+          <div id="advancedDisclosureBody" class="advancedBody disclosureContent" aria-hidden="true">
+            <div class="advancedFields">
+              <label><span>Pause boundary</span><span class="suffixControl"><input id="pauseMs" type="number" min="100" max="3000" step="50" value="450" /><em>ms</em></span></label>
+              <label><span>Maximum duration</span><span class="suffixControl"><input id="maxDuration" type="number" min="1" max="12" step="0.1" value="5.0" /><em>sec</em></span></label>
+            </div>
+            <label class="customCapsField">
+              <span>Always capitalize</span>
+              <input id="customCaps" value="Adobe, Premiere, OpenAI, ChatGPT, YouTube, TikTok" />
+              <small>Comma-separated names and brands. Common acronyms are automatic.</small>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace reviewWorkspace" id="smartPreviewSection">
+      <header class="sectionHeader reviewHeader">
+        <div><h2>Preview</h2><p id="transcriptMeta">Transcribe something to see composed captions.</p></div>
+        <span id="captionCount" class="countBadge">0 captions</span>
+      </header>
+      <div id="composerStats" class="statsRow"></div>
+      <div id="preview" class="preview"></div>
+    </section>
+
+    <section class="workspace deliveryWorkspace" id="smartExportSection">
+      <header class="sectionHeader deliveryHeader">
+        <div><h2>Export</h2><p>Auto-import saves revisioned SRTs beside the project.</p></div>
+      </header>
+      <div class="deliveryActions">
+        <div id="saveSrtBtn" class="exportAction uiButton" role="button" tabindex="0" aria-disabled="true">Save SRT</div>
+        <div id="copySrtBtn" class="exportAction uiButton" role="button" tabindex="0" aria-disabled="true">Copy</div>
+        <div id="saveImportBtn" class="exportAction primaryExport uiButton" role="button" tabindex="0" aria-disabled="true">Auto-save + Import</div>
+      </div>
+      <div id="clearBtn" class="destructiveTextAction uiButton" role="button" tabindex="0" aria-disabled="true">Clear cached transcript</div>
+    </section>
+
+    <section class="workspace jsonWorkspace modeHidden" id="wordJsonSection">
+      <header class="sectionHeader">
+        <div><h2>Word-level data</h2><p>Raw WhisperX segments and aligned timing.</p></div>
+        <span id="wordJsonCount" class="countBadge">0 words</span>
+      </header>
+      <div class="jsonNotice">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></svg>
+        <span><strong>Caption rules do not change this data.</strong><small>Word, start, end and score come directly from forced alignment.</small></span>
+      </div>
+      <p id="wordJsonMeta" class="helperText">Transcribe something to generate JSON.</p>
+      <pre id="wordJsonPreview" class="wordJsonPreview">{
+  "schema": "srijon-word-transcript-v1",
+  "segments": []
+}</pre>
+      <div class="deliveryActions jsonActions">
+        <div id="copyJsonBtn" class="exportAction uiButton" role="button" tabindex="0" aria-disabled="true">Copy JSON</div>
+        <div id="clearJsonBtn" class="exportAction uiButton" role="button" tabindex="0" aria-disabled="true">Clear</div>
+        <div id="saveJsonBtn" class="exportAction primaryExport uiButton" role="button" tabindex="0" aria-disabled="true">Auto-save JSON</div>
+      </div>
+    </section>
+
+  </main>
+  <script src="index.js"></script>
+</body>
+</html>

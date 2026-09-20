@@ -1,0 +1,50 @@
+{
+  "manifestVersion": 5,
+  "id": "com.srijon.captioner.local",
+  "name": "Srijon Captioner",
+  "shortname": "Captioner",
+  "version": "1.2.14",
+  "main": "index.html",
+  "host": {
+    "app": "premierepro",
+    "minVersion": "26.2.0"
+  },
+  "requiredPermissions": {
+    "localFileSystem": "fullAccess",
+    "clipboard": "readAndWrite",
+    "network": {
+      "domains": "all"
+    },
+    "launchProcess": {
+      "extensions": [
+        ".vbs",
+        ".bat"
+      ]
+    }
+  },
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "srijonCaptionerPanel",
+      "label": {
+        "default": "Srijon Captioner"
+      },
+      "minimumSize": {
+        "width": 300,
+        "height": 420
+      },
+      "maximumSize": {
+        "width": 2000,
+        "height": 2000
+      },
+      "preferredDockedSize": {
+        "width": 390,
+        "height": 760
+      },
+      "preferredFloatingSize": {
+        "width": 430,
+        "height": 820
+      }
+    }
+  ]
+}

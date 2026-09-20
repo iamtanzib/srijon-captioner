@@ -1,0 +1,30 @@
+name: Feature request
+description: Suggest a focused workflow or usability improvement.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Editing problem
+      description: What repeated editing task or limitation should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the user-visible workflow rather than only an implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround
+  - type: checkboxes
+    id: contracts
+    attributes:
+      label: Compatibility
+      options:
+        - label: I reviewed the existing feature contract and noted any behavior this would change.
+          required: true
