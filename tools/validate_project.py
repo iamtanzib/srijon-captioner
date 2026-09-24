@@ -12,6 +12,10 @@ MANIFEST = PLUGIN / "manifest.json"
 LAUNCHER = PLUGIN / "start_server_auto.bat"
 HIDDEN_LAUNCHER = PLUGIN / "start_server_hidden.vbs"
 NOTIFIER = PLUGIN / "notify_complete.vbs"
+STYLIZE = PLUGIN / "stylize.js"
+STYLIZE_INSTALLER = PLUGIN / "install_stylize_bridge.bat"
+STYLIZE_MANIFEST = PLUGIN / "stylize-bridge" / "CSXS" / "manifest.xml"
+STYLIZE_JSX = PLUGIN / "stylize-bridge" / "jsx" / "bridge.jsx"
 
 errors = []
 
@@ -32,7 +36,7 @@ hidden_launcher = HIDDEN_LAUNCHER.read_text(encoding="utf-8") if HIDDEN_LAUNCHER
 manifest = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
 
 require(manifest.get("id") == "com.srijon.captioner.local", "plugin id changed")
-require(manifest.get("version") == "1.2.14", "source manifest is not v1.2.14")
+require(manifest.get("version") == "1.3.0", "source manifest is not v1.3.0")
 require(manifest.get("main") == "index.html", "panel entrypoint is not index.html")
 bound_ids = set(re.findall(r'\$\("([A-Za-z0-9_-]+)"\)', js))
 html_ids = set(re.findall(r'id="([^"]+)"', html))
@@ -72,6 +76,10 @@ require('id="completionAlert"' in html and "notifyCaptionJobComplete" in js, "co
 require(NOTIFIER.exists() and "shell.Popup" in NOTIFIER.read_text(encoding="utf-8"), "Windows completion notifier missing")
 require(".vbs" in manifest.get("requiredPermissions", {}).get("launchProcess", {}).get("extensions", []), "completion notifier launch permission missing")
 require("STYLE_PRESET_STORAGE_KEY" in js, "caption preset support missing")
+require(STYLIZE.exists() and "srijon-mogrt-profile-v1" in STYLIZE.read_text(encoding="utf-8"), "MOGRT Stylize engine/profile support missing")
+require('id="modeStylizeBtn"' in html and 'id="stylizeGenerateBtn"' in html, "Stylize workspace controls missing")
+require(STYLIZE_INSTALLER.exists() and STYLIZE_MANIFEST.exists() and STYLIZE_JSX.exists(), "Stylize Premiere timeline bridge files missing")
+require("importMGT" in STYLIZE_JSX.read_text(encoding="utf-8") and "getMGTComponent" in STYLIZE_JSX.read_text(encoding="utf-8"), "Stylize bridge MOGRT insertion/text path missing")
 require("acquireWhisperServer" in js and "releaseWhisperServer" in js and "launchWhisperServerHidden" in js, "auto-server lifecycle missing")
 require("%LOCALAPPDATA%\\SrijonCaptioner" in launcher, "portable launcher does not use LOCALAPPDATA runtime")
 require("%LOCALAPPDATA%\\SrijonCaptioner" in hidden_launcher, "hidden launcher does not use LOCALAPPDATA runtime")
