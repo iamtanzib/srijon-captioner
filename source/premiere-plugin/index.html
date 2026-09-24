@@ -100,6 +100,10 @@
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5-4 7 4 7M16 5l4 7-4 7M14 4l-4 16"/></svg>
         <span>Word data</span>
       </div>
+      <div id="modeStylizeBtn" class="modeOption uiButton" role="button" tabindex="0">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 4.6L18 9.5l-4.2 1.8L12 16l-1.8-4.7L6 9.5l4.2-1.9L12 3Zm6 10 .9 2.1L21 16l-2.1.9L18 19l-.9-2.1L15 16l2.1-.9L18 13Z"/></svg>
+        <span>Stylize</span>
+      </div>
       <span id="outputModeChip" class="formatBadge">SRT</span>
     </nav>
     <input id="outputMode" class="hiddenSetting" value="smart" />
@@ -224,6 +228,66 @@
       <div id="clearBtn" class="destructiveTextAction uiButton" role="button" tabindex="0" aria-disabled="true">Clear cached transcript</div>
     </section>
 
+
+    <section class="workspace stylizeWorkspace modeHidden" id="stylizeSection">
+      <header class="sectionHeader">
+        <div>
+          <h2>Stylize</h2>
+          <p>Turn aligned transcript words into ready-to-use animated MOGRT captions.</p>
+        </div>
+        <span id="stylizeCount" class="countBadge">0 blocks</span>
+      </header>
+
+      <div class="stylizeIntro">
+        <strong>Profile-driven MOGRT captions</strong>
+        <span>The .srijon.json tells Captioner how many words each exposed text field can hold. Captioner decides the phrasing; Premiere receives finished MOGRT clips with real speech timing.</span>
+      </div>
+
+      <div class="settingList stylizeSettings">
+        <div class="settingsSection">
+          <div class="rowHeading">
+            <span><strong>Caption style</strong><small id="stylizeProfileMeta">Add the .srijon.json exported beside your MOGRT.</small></span>
+          </div>
+          <div class="stylizePresetRow">
+            <select id="stylizePresetSelect"><option value="">No MOGRT styles added</option></select>
+            <div id="addStylizePresetBtn" class="compactAction accentAction uiButton" role="button" tabindex="0">Add style</div>
+            <div id="removeStylizePresetBtn" class="compactIconAction uiButton" role="button" tabindex="0" title="Forget selected style" aria-label="Forget selected style">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="choiceRow stylizeTrackRow">
+          <span class="rowHeading"><strong>Target video track</strong><small>MOGRT captions are generated on this existing track</small></span>
+          <span class="suffixControl stylizeTrackControl"><em>V</em><input id="stylizeVideoTrack" type="number" min="1" max="99" step="1" value="3" /></span>
+        </div>
+
+        <label class="switchRow choiceRow phraseRow">
+          <span class="switchCopy"><strong>Replace previous generated clips</strong><small>Only removes Srijon-generated clips for this preset on the target track</small></span>
+          <input id="stylizeReplaceExisting" type="checkbox" checked />
+          <i class="switchTrack" aria-hidden="true"></i>
+        </label>
+
+        <div class="stylizeActions">
+          <div id="stylizeBuildBtn" class="exportAction uiButton" role="button" tabindex="0">Build smart preview</div>
+          <div id="stylizeGenerateBtn" class="exportAction primaryExport uiButton" role="button" tabindex="0">Generate on timeline</div>
+        </div>
+
+        <div class="stylizeHelperRow">
+          <div>
+            <strong>Premiere 26.2 timeline helper</strong>
+            <span>Required only for writing exposed MOGRT text fields reliably. Install once, then restart Premiere.</span>
+          </div>
+          <div id="stylizeInstallBridgeBtn" class="smallAction uiButton" role="button" tabindex="0">Install / repair helper</div>
+        </div>
+      </div>
+
+      <div class="sectionHeader stylizePreviewHeader">
+        <div><h2>Smart placement preview</h2><p>Each block below becomes one MOGRT clip.</p></div>
+      </div>
+      <div id="stylizePreview" class="stylizePreview"></div>
+    </section>
+
     <section class="workspace jsonWorkspace modeHidden" id="wordJsonSection">
       <header class="sectionHeader">
         <div><h2>Word-level data</h2><p>Raw WhisperX segments and aligned timing.</p></div>
@@ -247,5 +311,6 @@
 
   </main>
   <script src="index.js"></script>
+  <script src="stylize.js"></script>
 </body>
 </html>
