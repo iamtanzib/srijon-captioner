@@ -32,15 +32,16 @@ jobs:
         shell: pwsh
         run: |
           node --check source/premiere-plugin/index.js
+          node --check source/premiere-plugin/stylize.js
           python -m py_compile source/premiere-plugin/server.py source/whisper-server/server.py
 
       - name: Build CCX
-        run: python tools/build_ccx.py --version 1.2.14 --name Srijon-Captioner-v1.2.14-CI.ccx
+        run: python tools/build_ccx.py --version 1.3.0 --name Srijon-Captioner-v1.3.0-CI.ccx
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: srijon-captioner-${{ github.sha }}
-          path: build/Srijon-Captioner-v1.2.14-CI.ccx
+          path: build/Srijon-Captioner-v1.3.0-CI.ccx
           if-no-files-found: error
           retention-days: 14
