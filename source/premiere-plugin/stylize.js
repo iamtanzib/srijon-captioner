@@ -611,8 +611,70 @@ function renderStylizeWorkspace() {
   else stylizeRenderPreview();
 }
 
+
+function stylizeSetMode(active) {
+  const smartBtn = $("modeSmartBtn");
+  const jsonBtn = $("modeWordJsonBtn");
+  const stylizeBtn = $("modeStylizeBtn");
+  const input = $("outputMode");
+
+  if (active) {
+    if (input) input.value = "stylize";
+    localStorage.setItem("captioner.outputMode", "stylize");
+    if (smartBtn) {
+      smartBtn.classList.remove("active");
+      smartBtn.setAttribute("aria-pressed", "false");
+    }
+    if (jsonBtn) {
+      jsonBtn.classList.remove("active");
+      jsonBtn.setAttribute("aria-pressed", "false");
+    }
+    if (stylizeBtn) {
+      stylizeBtn.classList.add("active");
+      stylizeBtn.setAttribute("aria-pressed", "true");
+    }
+    if ($("outputModeChip")) $("outputModeChip").textContent = "MOGRT";
+    ["smartComposeSection","smartPreviewSection","smartExportSection","wordJsonSection"].forEach(function(id) {
+      const el = $(id); if (el) el.classList.add("modeHidden");
+    });
+    const section = $("stylizeSection");
+    if (section) section.classList.remove("modeHidden");
+    renderStylizeWorkspace();
+    setStatus(rawTranscript
+      ? "Stylize is ready. Choose a MOGRT profile, preview the smart word placement, then generate."
+      : "Stylize is ready. Transcribe first so it can use real aligned word timing.", "ready");
+    return;
+  }
+
+  if (stylizeBtn) {
+    stylizeBtn.classList.remove("active");
+    stylizeBtn.setAttribute("aria-pressed", "false");
+  }
+  const section = $("stylizeSection");
+  if (section) section.classList.add("modeHidden");
+}
+
+function stylizeWireMode() {
+  const stylizeBtn = $("modeStylizeBtn");
+  if (stylizeBtn) stylizeBtn.addEventListener("click", function() {
+    if (!guardNoActiveCaptionJob("open Stylize")) return;
+    stylizeSetMode(true);
+  });
+
+  ["modeSmartBtn","modeWordJsonBtn"].forEach(function(id) {
+    const button = $(id);
+    if (button) button.addEventListener("click", function() {
+      stylizeSetMode(false);
+    });
+  });
+
+  const stored = localStorage.getItem("captioner.outputMode");
+  if (stored === "stylize") stylizeSetMode(true);
+}
+
 function stylizeInit() {
   stylizeRenderPresetOptions("");
+  stylizeWireMode();
   const storedTrack = localStorage.getItem(STYLIZE_TRACK_STORAGE_KEY);
   if ($("stylizeVideoTrack")) $("stylizeVideoTrack").value = storedTrack || "3";
   const storedReplace = localStorage.getItem(STYLIZE_REPLACE_STORAGE_KEY);
