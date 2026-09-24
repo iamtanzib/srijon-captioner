@@ -1399,3 +1399,199 @@ select:focus {
     font-size: 8px;
   }
 }
+
+
+/* Stylize / smart MOGRT workspace */
+.stylizeWorkspace {
+  border-color: rgba(130, 92, 255, 0.22);
+}
+
+.stylizeIntro {
+  display: flex;
+  min-width: 0;
+  margin-bottom: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(130, 92, 255, 0.22);
+  border-radius: 10px;
+  background: rgba(130, 92, 255, 0.07);
+  flex-direction: column;
+}
+
+.stylizeIntro strong {
+  color: #e5dcff;
+  font-size: 9.5px;
+  font-weight: 620;
+}
+
+.stylizeIntro span {
+  margin-top: 3px;
+  color: #9f91c8;
+  font-size: 8.5px;
+  line-height: 1.45;
+}
+
+.stylizePresetRow,
+.stylizeActions,
+.stylizeHelperRow {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+}
+
+.stylizePresetRow {
+  margin-top: 8px;
+}
+
+.stylizePresetRow select {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.stylizePresetRow .compactAction,
+.stylizePresetRow .compactIconAction {
+  margin-left: 7px;
+}
+
+.stylizeTrackControl {
+  width: 84px;
+  flex: 0 0 84px;
+}
+
+.stylizeTrackControl em {
+  order: 0;
+}
+
+.stylizeTrackControl input {
+  width: 48px;
+}
+
+.stylizeActions {
+  padding: 10px 12px 12px;
+}
+
+.stylizeActions .exportAction + .exportAction {
+  margin-left: 7px;
+}
+
+.stylizeHelperRow {
+  justify-content: space-between;
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.stylizeHelperRow > div:first-child {
+  display: flex;
+  min-width: 0;
+  padding-right: 10px;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.stylizeHelperRow strong {
+  color: #d5d8de;
+  font-size: 8.8px;
+  font-weight: 620;
+}
+
+.stylizeHelperRow span {
+  margin-top: 2px;
+  color: var(--text-tertiary);
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.stylizeHelperRow .smallAction {
+  flex: 0 0 auto;
+}
+
+.stylizePreviewHeader {
+  margin-top: 14px;
+}
+
+.stylizePreview {
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-group);
+  background: #111318;
+}
+
+.stylizeEmpty {
+  padding: 26px 14px;
+  color: var(--text-tertiary);
+  font-size: 9px;
+  text-align: center;
+}
+
+.stylizeBlock {
+  padding: 9px 12px;
+}
+
+.stylizeBlock + .stylizeBlock {
+  border-top: 1px solid var(--line-soft);
+}
+
+.stylizeField {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  margin-top: 3px;
+}
+
+.stylizeField span {
+  width: 78px;
+  flex: 0 0 78px;
+  color: #7f8793;
+  font-size: 7.8px;
+  text-transform: uppercase;
+}
+
+.stylizeField strong {
+  min-width: 0;
+  color: #eceef2;
+  font-size: 10px;
+  font-weight: 610;
+  line-height: 1.4;
+}
+
+@media (max-width: 420px) {
+  .modeControl {
+    flex-wrap: wrap;
+  }
+
+  .modeControl .modeOption {
+    min-width: 29%;
+  }
+
+  .stylizePresetRow {
+    flex-wrap: wrap;
+  }
+
+  .stylizePresetRow select {
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  .stylizePresetRow .compactAction {
+    margin: 7px 0 0;
+    flex: 1 1 auto;
+  }
+
+  .stylizePresetRow .compactIconAction {
+    margin-top: 7px;
+  }
+
+  .stylizeActions,
+  .stylizeHelperRow {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .stylizeActions .exportAction + .exportAction,
+  .stylizeHelperRow .smallAction {
+    margin: 7px 0 0;
+  }
+
+  .stylizeHelperRow > div:first-child {
+    padding-right: 0;
+  }
+}
